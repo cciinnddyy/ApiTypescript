@@ -1,0 +1,5 @@
+Custom interface -> make the models strongly typed
+reference : https://medium.com/@tomanagle/strongly-typed-models-with-mongoose-and-typescript-7bc2f7197722
+
+Typescript compiling process
+tsconfig.json -> module relate to compatibility of js formating
