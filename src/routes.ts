@@ -17,7 +17,10 @@ router.use((req,res,next)=>{
         next();
 })
 
-router.post("/step",(req:express.Request,res:express.Response,next:express.NextFunction)=>{
+router.post("/step",(req:express.Request,res:express.Response)=>{
     new stepModels().saveData(req,res);
+
+    res.send('Hello');
+    
 })
 

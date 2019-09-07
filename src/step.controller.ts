@@ -4,6 +4,7 @@ import {mongodbHelper} from './mongodbHelper';
 
 import * as mongoose from 'mongoose';
 import { requestLoggerMiddleware } from 'requestLoggerMiddleware';
+import {Step} from './Istep';
 
 //const router = express.Router();
 
@@ -13,8 +14,10 @@ export class stepModels{
     private router: express.Router;
 
     private stepschema:mongoose.Schema;
-    private stepmodel:mongoose.Document;
+    //private stepmode:mongoose.Model<IStep>;
+    private stepinstant:mongoose.Document;
     
+    private db:mongodbHelper;
 
     constructor(){
         this.stepschema = new mongoose.Schema({
@@ -25,28 +28,28 @@ export class stepModels{
                 unique:true
             }
         })
-        mongoose.model("stepModel",this.stepschema);
+        this.db = new mongodbHelper(); 
+        this.db.connectToDB();
+        
     }
 
-    public saveData (req:express.Request,res:express.Response){
+    public async saveData (req:express.Request,res:express.Response){
         
             console.log(req.body);
             
-            this.stepmodel = new mongoose.Model(req.body);
-            this.stepmodel.save().then(doc=>{
-                if(doc!=null){
-                    res.status(201).send('success');
-                }
-                
+            this.stepinstant = new Step({
+                username:req.body.username,
+                macAddress:req.body.macAddress
+            })
+
+            await this.stepinstant.save().then(doc=>{
+                console.log(doc)
             }).catch(err=>{
-                res.status(500).json(err);
                 console.log(err);
             })
-        
-            
-            
-            res.end();
-        
-        
+            //mongoose.model("stepModel",this.stepschema,"stepModels");
+
+            //steps.create({username:req.body.username,macAddress:req.body.macAddress});
+       
     }
 }
