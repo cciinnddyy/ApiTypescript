@@ -2,10 +2,13 @@
   "name": "nodejstypescript02",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "scripts": {
     "build": "tsc",
     "start": "nodemon -x ts-node src/main.ts"
+    ,"compile": "rm -rf dist && tsc",
+    "prepublish": "npm run compile"
   },
   "author": "",
   "license": "ISC",

@@ -12,7 +12,7 @@ export class requestLoggerMiddleware{
         this.res.on('finished',()=>{
             const elapsed = new Date().getTime() - this.startTime;
             console.log(`${this.req.method} ${this.req.originalUrl} ${this.res.status} Time taking: ${elapsed}`);
-
+            
         });
         this.next();
     }
