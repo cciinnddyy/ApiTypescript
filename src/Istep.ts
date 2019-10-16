@@ -24,10 +24,6 @@ export const stepSchema : mongoose.Schema = new mongoose.Schema({
 })
 
 
-export interface IStepModel extends IStep, Document {
-  
-}
-
 stepSchema.methods.timeTrans = function(){
    var day = new Date(this.timestamp).getUTCDate().toString();
    var month = new Date(this.timestamp).getMonth().toString();
@@ -44,4 +40,4 @@ stepSchema.pre("save", function (next) {
 
 //export const User: Model<IUserModel> = model<IUserModel>("User", UserSchema);
 
-export const Step:mongoose.Model<IStep> = mongoose.model<IStep> ("stepModel",stepSchema);
+export const Step:mongoose.Model<IStep> = mongoose.model<IStep> ("stepModel",stepSchema,"stepsmodels");

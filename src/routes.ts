@@ -23,8 +23,14 @@ router.post("/step",(req:express.Request,res:express.Response)=>{
     new stepModels().saveData(req,res);
     
     res.send('Hello');
-
+    
     //console.log();
     
+})
+
+router.post("/pulse",(req:express.Request,res:express.Response)=>{
+
+    res.send("prankster");
+
 })
 
