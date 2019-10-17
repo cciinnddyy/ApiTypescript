@@ -1,5 +1,11 @@
 Custom interface -> make the models strongly typed
 reference : https://medium.com/@tomanagle/strongly-typed-models-with-mongoose-and-typescript-7bc2f7197722
 
+Extends interface of Mongoose "Document"
+Model is the subclass of Document
+Extends the class of Mongoose "Schema"
+
 Typescript compiling process
 tsconfig.json -> module relate to compatibility of js formating
+
+To compile typescript to javascript using "npm run compile"

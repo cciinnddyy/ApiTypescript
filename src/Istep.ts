@@ -1,5 +1,6 @@
 //import { Interface } from "readline";
 import * as mongoose from 'mongoose';
+
 export interface IStep extends mongoose.Document{
     username?:string;
     macAddress?:number;
@@ -10,6 +11,7 @@ export interface IStep extends mongoose.Document{
     timezone?:string;
     calories?:Number;
     steps?:Number;
+    weekGoal?:Number
 }
 
 export const stepSchema : mongoose.Schema = new mongoose.Schema({
@@ -20,7 +22,8 @@ export const stepSchema : mongoose.Schema = new mongoose.Schema({
     calories:Number,
     timeStampString:String,
     timezone:String,
-    steps:Number
+    steps:Number,
+    weekGoal:Number
 })
 
 
