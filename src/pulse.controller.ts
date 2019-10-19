@@ -12,31 +12,44 @@ export class pulseController {
     
     constructor(){
 
-        //this.db = new mongodbHelper();
-        //this.db.connectToDB();
+       // this.db = new mongodbHelper();
+       // this.db.connectToDB();
     }
 
 
     public savePulseAll(req:Request,res:Response){
-        const pulsecount:number = req.body.content.length;
+        const pulsecount:number = req.body.conTent.length;
         if(pulsecount!=0){
             for(let counter =0; counter< pulsecount ;counter++){
 
                
-                var pulseinstant = new pulse({
-                    timestamp:req.body.content[counter].timezone,
-                    pulse:req.body.content[counter].pulse,
+                const pulseinstant = new pulse({
+                    timestamp:req.body.conTent[counter].timestamp,
+                    timezone:req.body.timeZone,
+                    pulse:req.body.conTent[counter].pulse,
                     macAddress:req.body.macAddress,
                     username:"cindy",
-                
+                    
                 })
 
                 pulseinstant.timeTrans();
+                
+                pulseinstant.save().then(doc=>{
+                    
+                    console.log(doc);
+                })
+                
+                .catch(err=>{
+                    console.log(err);
+                })
 
                 
             }
+
             
         }
         
     }
+
+    
 }

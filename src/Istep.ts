@@ -29,12 +29,14 @@ export const stepSchema : mongoose.Schema = new mongoose.Schema({
 
 stepSchema.methods.timeTrans = function(){
    var day = new Date(this.timestamp).getUTCDate().toString();
-   var month = new Date(this.timestamp).getMonth().toString();
+   var month = new Date(this.timestamp).getUTCMonth().toString();
    var year = new Date(this.timestamp).getUTCFullYear().toString();
 
    this.timeStampString = `${day}-${month}-${year}`;
    console.log(this.timeStampString);
 }
+
+
 
 stepSchema.pre("save", function (next) {
   

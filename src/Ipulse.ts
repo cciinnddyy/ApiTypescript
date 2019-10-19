@@ -8,29 +8,27 @@ export interface Ipulse extends mongoose.Document {
     timeTrans():void;
     timeStampString:String;
     timezone?:string;
-    pulse?:Number;
+    pulse?:number;
 }
 
-export class pulseSchema extends mongoose.Schema {
-    username?:String;
-    macAddress?:number;
+export const pulseschema: mongoose.Schema = new mongoose.Schema({
+    username:String,
+    macAddress:Number,
     
-    timestamp?:number;
-    timeStampString:String;
-    timezone?:string;
-    pulse?:Number;
-    
-    public timeTrans():void{
+    timestamp:Number,
+    timeStampString:String,
+    timezone:String,
+    pulse:Number
+})
+
+pulseschema.methods.timeTrans = function(){
         var day = new Date(this.timestamp).getUTCDate().toString();
-        var month = new Date(this.timestamp).getMonth().toString();
+        var month = new Date(this.timestamp).getUTCMonth().toString();
         var year = new Date(this.timestamp).getUTCFullYear().toString();
+        this.timestampString = `${day}-${month}-${year}`;
 
-        this.timeStampString = `${day}-${month}-${year}`;
-        console.log(this.timeStampString);
-    }
+        
+        console.log(this.timestampString);
 }
-
-
-export const pulseschema  = new pulseSchema();
 
 export const pulse : mongoose.Model<Ipulse> = mongoose.model("pulsemodel",pulseschema,"pulseCollects");

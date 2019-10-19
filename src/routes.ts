@@ -2,7 +2,7 @@ import * as express from 'express';
 
 import {stepModels} from './step.controller'; 
 
-import {pulse}
+import {pulseController} from './pulse.controller';
 
 export const router = express.Router();
 
@@ -33,6 +33,10 @@ router.post("/step",(req:express.Request,res:express.Response)=>{
 
 router.post("/pulse",(req:express.Request,res:express.Response)=>{
 
+    const pulsectrl = new pulseController();
+
+    pulsectrl.savePulseAll(req,res);
+    
     res.send("prankster");
 
 })

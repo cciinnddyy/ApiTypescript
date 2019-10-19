@@ -36,30 +36,31 @@ export class stepModels{
         if(req.body.fileName == "stepTable.json"){
             const dataLength:Number = req.body.conTent.length;
             const absolutepath:string = path.resolve('src/samples/step.txt');
-            fs.exists(absolutepath,function(exist){
-                if(exist){
-                    fs.appendFile(absolutepath,JSON.stringify(req.body),function(err){
-                     if(err){   
-                     console.log(err);}
-                     else{
-                         console.log('success');
-                     }
-                    });
-                }
-                else{
-                 fs.writeFile(absolutepath,JSON.stringify(req.body),function(err){
-                     if(err){
-                     console.log(err);}
-                     else{
-                         console.log('success');
-                     }
-                 })
-                }
-            })
+            // fs.exists(absolutepath,function(exist){
+            //     if(exist){
+            //         fs.appendFile(absolutepath,JSON.stringify(req.body),function(err){
+            //          if(err){   
+            //          console.log(err);}
+            //          else{
+            //              console.log('success');
+            //          }
+            //         });
+            //     }
+            //     else{
+            //      fs.writeFile(absolutepath,JSON.stringify(req.body),function(err){
+            //          if(err){
+            //          console.log(err);}
+            //          else{
+            //              console.log('success');
+            //          }
+            //      })
+            //     }
+            // })
             if(dataLength!=0){
                 for(let counter=0; counter < dataLength;counter++){
                     
                 var stepinstant = new Step({
+                    username:"cindy",
                     timezone:req.body.timeZone,
                     macAddress:req.body.macAddress,
                     distance:req.body.conTent[counter].distance,
@@ -74,7 +75,7 @@ export class stepModels{
                stepinstant.timeTrans();
                
                console.log(stepinstant);
-                
+            
                
             }
         }
@@ -116,5 +117,21 @@ export class stepModels{
 
            
        
+    }
+
+    //receive input from the user
+    //findOne => only the first one record
+    //Model.find(conditions, [projection], [options], [callback])
+    public updateWeekGoal(req:Request,res:Response){
+         var stepinstant = Step.find({username:"cindy"},function(err,doc){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log(doc);
+            }
+
+         });
+         
     }
 }
