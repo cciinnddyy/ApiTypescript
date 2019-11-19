@@ -12,8 +12,8 @@ export class pulseController {
     
     constructor(){
 
-       // this.db = new mongodbHelper();
-       // this.db.connectToDB();
+        this.db = new mongodbHelper();
+        this.db.connectToDB();
     }
 
 
@@ -33,7 +33,7 @@ export class pulseController {
                 })
 
                 pulseinstant.timeTrans();
-                
+                console.log(pulseinstant);
                 pulseinstant.save().then(doc=>{
                     
                     console.log(doc);

@@ -8,7 +8,7 @@ import {Step} from './Istep';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import {parse} from 'querystring';
+import {parse, stringify} from 'querystring';
 //const router = express.Router();
 
 
@@ -23,8 +23,8 @@ export class stepModels{
 
     constructor(){
         
-        //this.db = new mongodbHelper(); 
-        //this.db.connectToDB();
+        this.db = new mongodbHelper(); 
+        this.db.connectToDB();
         
     }
 
@@ -75,45 +75,48 @@ export class stepModels{
                stepinstant.timeTrans();
                
                console.log(stepinstant);
+                
+               await stepinstant.save().then(doc=>{
+                console.log(doc)
+                }).catch(err=>{
+                   console.log(err);
+                })
+               
             
                
+            /* else if(req.body.fileName=="pulseTable.json"){
+                    const absolutepath:string = path.resolve('src/samples/pulse.txt');
+                    fs.exists(absolutepath,function(exist){
+                        if(exist){
+                            fs.appendFile(absolutepath,JSON.stringify(req.body),function(err){
+                             if(err){   
+                             console.log(err);}
+                             else{
+                                 console.log('success');
+                             }
+                            });
+                        }
+                        else{
+                         fs.writeFile(absolutepath,JSON.stringify(req.body),function(err){
+                             if(err){
+                             console.log(err);}
+                             else{
+                                 console.log('success');
+                             }
+                         })
+                        }
+                    })
+                }
+                else{
+                    
+                } */
             }
         }
             
         }
-        else if(req.body.fileName=="pulseTable.json"){
-            const absolutepath:string = path.resolve('src/samples/pulse.txt');
-            fs.exists(absolutepath,function(exist){
-                if(exist){
-                    fs.appendFile(absolutepath,JSON.stringify(req.body),function(err){
-                     if(err){   
-                     console.log(err);}
-                     else{
-                         console.log('success');
-                     }
-                    });
-                }
-                else{
-                 fs.writeFile(absolutepath,JSON.stringify(req.body),function(err){
-                     if(err){
-                     console.log(err);}
-                     else{
-                         console.log('success');
-                     }
-                 })
-                }
-            })
-        }
-        else{
             
-        }
-            // await this.stepinstant.save().then(doc=>{
-            //     console.log(doc)
-            // }).catch(err=>{
-            //     console.log(err);
-            // })
 
-            //mongoose.model("stepModel",this.stepschema,"stepModels");
+        //mongoose.model("stepModel",this.stepschema,"stepModels");
 
            
        
@@ -133,5 +136,31 @@ export class stepModels{
 
          });
          
+    }
+
+    public promisemethod:  
+    {
+
+    }
+
+    public async ListWeekData(name: String, res: express.Response)
+    {
+        
+        var stepdocs = "";
+        await Step.find({'username':`${name}`,'steps':0},(error,docs)=>{
+            //console.log(docs);
+            res.send(JSON.stringify (docs));
+        }).catch((err)=>{
+            console.log(err);
+        }).then((doc)=>{
+             //result =JSON.stringify(doc);
+             //res.send(result);
+        });
+
+        //return stepdocs;
+        
+        //Find weekly data by name 
+        //show data in the web
+        
     }
 }

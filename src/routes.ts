@@ -34,10 +34,19 @@ router.post("/step",(req:express.Request,res:express.Response)=>{
 router.post("/pulse",(req:express.Request,res:express.Response)=>{
 
     const pulsectrl = new pulseController();
-
+    
     pulsectrl.savePulseAll(req,res);
     
     res.send("prankster");
 
 })
 
+router.post(`/step/weekly`,(req:express.Request,res:express.Response)=>{
+    var queryResult = "";
+    console.log(req.body.name);
+    
+    new stepModels().ListWeekData(req.body.name,res);
+
+    //res.send(queryResult);
+    //res.send("stepmodelLists");
+})

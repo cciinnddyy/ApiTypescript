@@ -13,7 +13,7 @@ export interface Ipulse extends mongoose.Document {
 
 export const pulseschema: mongoose.Schema = new mongoose.Schema({
     username:String,
-    macAddress:Number,
+    macAddress:String,
     
     timestamp:Number,
     timeStampString:String,
