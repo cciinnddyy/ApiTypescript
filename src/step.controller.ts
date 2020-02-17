@@ -147,8 +147,8 @@ export class stepModels{
     {
         
         var stepdocs = "";
-        await Step.find({'username':`${name}`,'steps':0},(error,docs)=>{
-            //console.log(docs);
+        await Step.find({'username':`${name}`},(error,docs)=>{
+            console.log(docs);
             res.send(JSON.stringify (docs));
         }).catch((err)=>{
             console.log(err);
